@@ -1,0 +1,41 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="htmlhead">
+	<meta charset="utf-8"></meta>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8"></meta>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
+	<meta name="description" content=""></meta>
+	<meta name="author" content=""></meta>
+	<link rel="shortcut icon" type="image/png" th:href="@{/images/favicon.png}"></link>
+
+	<title th:text="${title}">(title)</title>
+
+	<link th:href="@{/webjars/bootstrap/3.2.0/css/bootstrap.css}" rel="stylesheet"></link>
+	<link th:href="@{/css/style.css}" rel="stylesheet"></link>
+</head>
+
+<body>
+<div th:fragment="navbar" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+	<div class="container">
+		<div class="navbar-header"></div>
+		<div class="collapse navbar-collapse"></div>
+	</div>
+</div>
+
+<div class="container">
+	<div class="starter-template">
+		<h1>Spring MVC/Thymeleaf/Bootstrap</h1>
+
+		<p class="lead" th:text="${greeting}">(greeting)</p>
+	</div>
+</div>
+
+<div th:fragment="footer" id="footer">
+	<div class="container">
+		<!--<p class="muted credit">developed by usnjokers</p>-->
+	</div>
+	<script th:src="@{/webjars/jquery/2.0.3/jquery.min.js}"></script>
+	<script th:src="@{/webjars/bootstrap/3.2.0/js/bootstrap.min.js}"></script>
+</div>
+
+</body>
+</html>

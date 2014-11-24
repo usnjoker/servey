@@ -1,0 +1,124 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="layout :: htmlhead" th:with="title='Hello'"></head>
+
+<body>
+	<div th:replace="layout :: navbar">(navbar)</div>
+
+	<div class="container">
+		<form action="#" id="form" th:object="${servey}" method="post" accept-charset="UTF-8">
+			<input type="hidden" th:field="*{name}" th:value="${servey.name}"/>
+			<input type="hidden" th:field="*{hp}" th:value="${servey.hp}"/>
+			<input type="hidden" id="questionSeq" name="questionSeq" th:value="${servey.question.id}"/>
+			<!--<input type="hidden" th:field="*{question}" th:value="${servey.question}"/>-->
+			<input type="hidden" th:field="*{duration}" th:value="${servey.duration}"/>
+
+			<input type="hidden" id="test1" th:value="${question.id}"/>
+			<input type="hidden" id="test2" th:value="${servey.question.id}"/>
+			<input type="hidden" id="test3" th:value="${question}"/>
+
+			<input type="hidden" id="prevLink" th:value="${prevLink}"/>
+			<input type="hidden" id="nextLink" th:value="${nextLink}"/>
+			<input type="hidden" id="completeLink" th:value="${completeLink}"/>
+			<input type="hidden" id="questionOrdering" name="questionOrdering" th:value="${questionOrdering}"/>
+			<input type="hidden" id="navigateType" name="navigateType" value=""/>
+			<div class="starter-template">
+				<h1 th:text="${id}">문항 (id)</h1>
+
+				<p class="lead" th:text="${question.question}">(question.question)</p>
+
+				<div th:if="${question.type?.name() == 'SUBJECTIVE'}" style="height: 120px;">
+					<textarea class="col-xs-12 col-md-12" rows="5" th:field="*{answer}"></textarea>
+				</div>
+
+				<div th:each="objectiveItem: ${question.objectiveItemList}">
+					<div th:switch="${question.type?.name()}">
+						<div th:case="'OBJECTIVE_MULTIPLE'">
+							<label th:for="${#ids.next('answer')}">
+								<input type="checkbox" th:field="*{answer}" th:value="${objectiveItem.itemName}" th:text="${objectiveItem.itemName}"/>
+							</label>
+						</div>
+						<div th:case="'OBJECTIVE_SINGLE'">
+							<label th:for="${#ids.next('answer')}">
+								<input type="radio" th:field="*{answer}" th:value="${objectiveItem.itemName}" th:text="${objectiveItem.itemName}"/>
+							</label>
+						</div>
+
+					</div>
+
+				</div>
+
+				<div style="text-align: right;">
+					<button th:if="${prevLink}" type="button" id="prevBtn" class="btn btn-warning btn-lg"  onclick="prev();">
+						<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> 이전
+					</button>
+					<button th:if="${nextLink}" type="button" id="nextBtn" class="btn btn-default btn-lg"  onclick="next();">
+						<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span> 다음
+					</button>
+					<button th:if="${completeLink}" type="btton" id="completeBtn" class="btn btn-success btn-lg"  onclick="complete();">
+						<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span> 완료
+					</button>
+				</div>
+			</div>
+		</form>
+	</div>
+
+	<div th:include="layout :: footer" id="footer">(footer)</div>
+
+	<script th:inline="javascript">
+		/*<![CDATA[*/
+
+		var isValid = false;
+
+		$("label, input[type=checkbox], input[type=radio]").click(function() {
+			if (undefined != $("input[name=answer]:checked").val()) {
+				$("#nextBtn").addClass("btn-primary");
+				isValid = true;
+			} else {
+				$("#nextBtn").removeClass("btn-primary");
+				isValid = false;
+			}
+		});
+
+		if (undefined != $("input[name=answer]:checked").val()) {
+			$("#nextBtn").addClass("btn-primary");
+			isValid = true;
+		} else {
+			$("#nextBtn").removeClass("btn-primary");
+			isValid = false;
+		}
+
+		$("textarea").on("blur", function() {
+			if ($(this).val().length > 0) {
+				$("#completeBtn").addClass("btn-success");
+				isValid = true;
+			} else {
+				$("#completeBtn").removeClass("btn-success");
+				isValid = false;
+			}
+		});
+
+		function prev() {
+
+			document.getElementById("form").action = $("#prevLink").val();
+			document.getElementById("form").submit();
+		}
+
+		function next() {
+			if (!isValid) {
+				return;
+			}
+			document.getElementById("form").action = $("#nextLink").val();
+			document.getElementById("form").submit();
+		}
+
+		function complete() {
+			document.getElementById("form").action = $("#completeLink").val();
+			document.getElementById("form").submit();
+		}
+
+		/*]]>*/
+	</script>
+
+</body>
+
+</html>

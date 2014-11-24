@@ -1,0 +1,75 @@
+buildscript {
+	repositories {
+		mavenLocal()
+		maven { url "http://repo.spring.io/libs-release" }
+		maven { url "http://repo.spring.io/snapshot" }
+		maven { url "http://repo.spring.io/milestone" }
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:1.1.8.RELEASE")
+		classpath("org.springframework:springloaded:1.2.0.RELEASE")
+	}
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'spring-boot'
+apply plugin: 'war'
+
+idea {
+	module {
+		inheritOutputDirs = false
+		outputDir = file("$buildDir/classes/main/")
+	}
+}
+
+war {
+	baseName = 'usnjoker'
+	version =  '0.1.0'
+}
+
+repositories {
+	mavenLocal()
+	maven { url 'http://repo.spring.io/libs-release' }
+	maven { url 'http://repo.sindica.to/nexus/content/repositories/snapshots/' }
+
+}
+
+dependencies {
+	compile("org.springframework.boot:spring-boot-starter-data-jpa")
+	compile("org.springframework.boot:spring-boot-starter-data-rest")
+	compile("org.springframework.boot:spring-boot-starter-web") {}
+	compile("org.springframework.boot:spring-boot-starter-actuator")
+	compile("org.thymeleaf:thymeleaf-spring4:2.1.2.RELEASE")
+
+	compile("org.apache.commons:commons-lang3:3.2.1")
+	compile("com.google.guava:guava:16.0.1")
+	compile("org.apache.poi:poi:3.9")
+
+	compile("mysql:mysql-connector-java:5.1.31")
+
+	testCompile("junit:junit")
+
+	compile("org.webjars:bootstrap:3.2.0")
+	compile("org.webjars:font-awesome:4.2.0")
+	compile("org.webjars:jquery:2.0.3-1")
+}
+
+task wrapper(type: Wrapper) {
+	gradleVersion = '1.8'
+}
+
+task stopTomcat(type:Exec) {
+	workingDir '../..'
+
+	commandLine './stopTomcat.sh'
+
+	//store the output instead of printing to the console:
+	standardOutput = new ByteArrayOutputStream()
+
+	//extension method stopTomcat.output() can be used to obtain the output:
+	ext.output = {
+		return standardOutput.toString()
+	}
+}
