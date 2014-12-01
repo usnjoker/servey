@@ -2,13 +2,21 @@ package com.usnjoker.web;
 
 import com.google.common.base.Strings;
 import com.usnjoker.domain.*;
+import org.apache.poi.util.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.util.Date;
 import java.util.Locale;
 
@@ -51,7 +59,7 @@ public class ServeyController {
 	@RequestMapping("/b1/index")
 	public String indexB1(Locale locale, Model model, Servey servey) {
 		model.addAttribute("promotion", "b1");
-		model.addAttribute("nextLink", getLink("servey", "b1", 1L));
+		model.addAttribute("nextLink", getLink("servey", "b1", 2L));
 		model.addAttribute("servey", servey);
 		return "index";
 	}
@@ -59,7 +67,7 @@ public class ServeyController {
 	@RequestMapping("/b2/index")
 	public String indexB2(Locale locale, Model model, Servey servey) {
 		model.addAttribute("promotion", "b2");
-		model.addAttribute("nextLink", getLink("servey", "b2", 1L));
+		model.addAttribute("nextLink", getLink("servey", "b2", 2L));
 		model.addAttribute("servey", servey);
 		return "index";
 	}
@@ -110,7 +118,7 @@ public class ServeyController {
 	@RequestMapping("/b2/{questionOrdering}")
 	public String b2(Locale locale, Model model, Servey servey, @PathVariable("questionOrdering") Long questionOrdering, @ModelAttribute("questionSeq") String questionSeq)
 		throws Exception {
-		if (null == questionOrdering) questionOrdering = 0L;
+		if (null == questionOrdering) questionOrdering = 1L;
 
 		if (!Strings.isNullOrEmpty(questionSeq)) {
 			servey.setQuestionId(Long.parseLong(questionSeq));
@@ -151,20 +159,42 @@ public class ServeyController {
 
 	@RequestMapping("/c1/complete")
 	public String completeB1(Locale locale, Model model) {
+        String fullPath = "/images/cou10.jpg";
+        File file = new File(fullPath);
 		model.addAttribute("promotion", "/images/cou10.jpg");
+        model.addAttribute("fileName", "/servey/download/cou10");
 		return "result";
 	}
+
+    @RequestMapping(value = "/download/{fileName}")
+    @ResponseBody
+    public void   getLogFile(HttpSession session, HttpServletResponse response, @PathVariable("fileName") String fileName) throws Exception{
+        try{
+            logger.debug("fileName: {}", fileName);
+            File fileToDownload = new File("/Users/coupang/dev/IdeaProjects/usnjoker/out/production/usnjoker/static/images/" + fileName + ".jpg");
+            InputStream inputStream = new FileInputStream(fileToDownload);
+            response.setContentType("application/force-download");
+            response.setHeader("Content-Disposition", "attachment; filename="+fileName+".jpg");
+            IOUtils.copy(inputStream, response.getOutputStream());
+            response.flushBuffer();
+
+        }catch(Exception e){
+            logger.debug("Request could not be completed at this moment. Please try again.");
+            e.printStackTrace();
+        }
+
+    }
 
 	@RequestMapping("/c2/complete")
 	public String completeB2(Locale locale, Model model) {
 		model.addAttribute("promotion", "/images/cou30.jpg");
+        model.addAttribute("fileName", "/servey/download/cou30");
 		return "result";
 	}
 
 	private String getLink(String prefix, String promotionName, Long questionOrdering) {
 		return new StringBuilder("/").append(prefix).append("/").append(promotionName).append("/").append(questionOrdering).toString();
 	}
-
 
 
 }

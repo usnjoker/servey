@@ -9,6 +9,14 @@
 		<input type="hidden" id="questionOrdering" name="questionOrdering" th:value="${questionOrdering}"/>
 		<input type="hidden" id="navigateType" name="navigateType" value=""/>
 		<img class="img-responsive" th:src="${promotion}"/>
+
+        <div>
+
+            <a type="button" id="prevBtn" class="btn btn-warning btn-lg"  onclick="" th:href="${fileName}">
+                <span class="glyphicon glyphicon-save" ></span> 다운로드
+            </a>
+
+        </div>
 	</form>
 </div>
 
