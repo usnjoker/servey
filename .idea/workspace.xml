@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="74f5879b-364e-4a06-95e1-cf2c7c3f9571" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/templates/index.html" afterPath="$PROJECT_DIR$/src/main/resources/templates/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/usnjoker/web/ServeyController.java" afterPath="$PROJECT_DIR$/src/main/java/com/usnjoker/web/ServeyController.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="usnjoker.iws" />
@@ -99,20 +99,20 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ServeyController.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="ServeyController.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/usnjoker/web/ServeyController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="720" max-vertical-offset="2490">
-              <caret line="81" column="9" selection-start-line="81" selection-start-column="9" selection-end-line="81" selection-end-column="9" />
+            <state vertical-scroll-proportion="0.67321175" vertical-offset="165" max-vertical-offset="2490">
+              <caret line="53" column="64" selection-start-line="53" selection-start-column="64" selection-end-line="53" selection-end-column="64" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.html" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="index.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/resources/templates/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.8055152" vertical-offset="0" max-vertical-offset="689">
+            <state vertical-scroll-proportion="-23.125" vertical-offset="0" max-vertical-offset="645">
               <caret line="37" column="0" selection-start-line="37" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
               <folding />
             </state>
@@ -600,8 +600,8 @@
         <option value="$PROJECT_DIR$/src/main/resources/templates/servey.html" />
         <option value="$PROJECT_DIR$/build.gradle" />
         <option value="$PROJECT_DIR$/src/main/java/com/usnjoker/domain/ServeyService.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/usnjoker/web/ServeyController.java" />
         <option value="$PROJECT_DIR$/src/main/resources/templates/index.html" />
+        <option value="$PROJECT_DIR$/src/main/java/com/usnjoker/web/ServeyController.java" />
       </list>
     </option>
   </component>
@@ -1461,17 +1461,21 @@
       <workItem from="1416744320481" duration="2158000" />
       <workItem from="1416837715981" duration="1175000" />
       <workItem from="1416839913994" duration="73000" />
-      <workItem from="1419247997461" duration="295000" />
+      <workItem from="1419247997461" duration="515000" />
     </task>
     <task id="LOCAL-00001" summary="저장 없앰">
       <created>1419248173531</created>
       <updated>1419248173531</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="index 수정">
+      <created>1419248361328</created>
+      <updated>1419248361328</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="87233000" />
+    <option name="totallyTimeSpent" value="87453000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="873" extended-state="6" />
@@ -1530,7 +1534,8 @@
       <TodoPanelSettings />
     </option>
     <MESSAGE value="저장 없앰" />
-    <option name="LAST_COMMIT_MESSAGE" value="저장 없앰" />
+    <MESSAGE value="index 수정" />
+    <option name="LAST_COMMIT_MESSAGE" value="index 수정" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1887,18 +1892,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/usnjoker/web/ServeyController.java">
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="720" max-vertical-offset="2490">
-          <caret line="81" column="9" selection-start-line="81" selection-start-column="9" selection-end-line="81" selection-end-column="9" />
+        <state vertical-scroll-proportion="-23.125" vertical-offset="0" max-vertical-offset="645">
+          <caret line="37" column="0" selection-start-line="37" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/index.html">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/usnjoker/web/ServeyController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8055152" vertical-offset="0" max-vertical-offset="689">
-          <caret line="37" column="0" selection-start-line="37" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.67321175" vertical-offset="165" max-vertical-offset="2490">
+          <caret line="53" column="64" selection-start-line="53" selection-start-column="64" selection-end-line="53" selection-end-column="64" />
           <folding />
         </state>
       </provider>

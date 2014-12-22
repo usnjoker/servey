@@ -51,7 +51,7 @@ public class ServeyController {
 	@RequestMapping("/b1/index")
 	public String indexB1(Locale locale, Model model, Servey servey) {
 		model.addAttribute("promotion", "b1");
-		model.addAttribute("nextLink", getLink("servey", "b1", 1L));
+		model.addAttribute("nextLink", getLink("servey", "b1", 2L));
 		model.addAttribute("servey", servey);
 		return "index";
 	}
@@ -59,7 +59,7 @@ public class ServeyController {
 	@RequestMapping("/b2/index")
 	public String indexB2(Locale locale, Model model, Servey servey) {
 		model.addAttribute("promotion", "b2");
-		model.addAttribute("nextLink", getLink("servey", "b2", 1L));
+		model.addAttribute("nextLink", getLink("servey", "b2", 2L));
 		model.addAttribute("servey", servey);
 		return "index";
 	}
