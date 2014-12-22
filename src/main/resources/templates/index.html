@@ -5,163 +5,31 @@
 <div th:replace="layout :: navbar">(navbar)</div>
 
 <div class="container">
-	<form action="#" id="form" th:action="${nextLink}" th:object="${servey}" method="post" accept-charset="UTF-8">
-		<input type="hidden" id="navigateType" name="navigateType"/>
-		<div class="starter-template">
-			<h4>개인정보 수집 동의</h4>
-			<p>본 설문은 당사 내부에서의 의사결정을 위한 정보 수집을 목적으로 하며, 여기에 기재하시는 개인 정보는 내부 직원이라도 볼 수 없도록 암호화 되어 있습니다. 개인정보 수집에 동의 하시면 아래 정보를 입력하신 후 '다음' 버튼을 눌러주셔서 설문을 시작해 주시기 바랍니다.</p>
-			<div class="form-group form-group-lg">
-				<div class="col-xs-12">
-				<input type="text" id="nameText" class="form-control" placeholder="이름을 입력해 주세요" th:field="*{name}" value="정원석"/>
-				</div>
-			</div>
-			<div class="m10" style="width: 100%;"></div>
-			<div class="form-group form-group-lg">
-				<div class="col-xs-4">
-					<input type="text" id="hp1Text" class="form-control" placeholder="휴대폰1" maxlength="3" value=""/>
-				</div>
-			</div>
-			<div class="form-group form-group-lg">
-				<div class="col-xs-4">
-					<input type="text" id="hp2Text" class="form-control" placeholder="휴대폰2" maxlength="4" value=""/>
-				</div>
-			</div>
-			<div class="form-group form-group-lg">
-				<div class="col-xs-4">
-					<input type="text" id="hp3Text" class="form-control" placeholder="휴대폰3" maxlength="4" value=""/>
-				</div>
-			</div>
-			<input type="hidden" id="hp" name="hp" value=""/>
-			<div class="m10" style="width: 100%;"></div>
-			<div class="m10" style="width: 100%;"></div>
-			<div style="text-align: right;">
-				<button type="button" id="nextBtn" class="btn btn-default btn-lg"  onclick="next();">
-					<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span> 다음
-				</button>
-			</div>
-		</div>
-	</form>
+    <form action="#" id="form" th:action="${nextLink}" th:object="${servey}" method="post" accept-charset="UTF-8">
+        <input type="hidden" id="navigateType" name="navigateType"/>
+        <div class="starter-template">
+            <h4>개인정보 수집 동의</h4>
+            <p>본 설문은 당사 내부에서의 의사결정을 위한 정보 수집을 목적으로 하며, 여기에 기재하시는 개인 정보는 내부 직원이라도 볼 수 없도록 암호화 되어 있습니다. '다음' 버튼을 누르시면 설문이 시작됩니다.</p>
+
+            <div style="text-align: right;">
+                <button type="button" id="nextBtn" class="btn btn-default btn-lg btn-primary"  onclick="next();">
+                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span> 다음
+                </button>
+            </div>
+        </div>
+    </form>
 </div>
 
 <div th:include="layout :: footer" id="footer">(footer)</div>
 
 <script th:inline="javascript">
-	/*<![CDATA[*/
+    /*<![CDATA[*/
 
-	var validateName = false, validateHp1 = false, validateHp2 = false, validateHp3 = false;
-	$("#nameText").bind("blur", function() {
-		if ($(this).val().length > 1)
-			validateName = true;
-		else
-			validateName = false;
+    function next() {
+        document.getElementById("form").submit();
+    }
 
-		visibilityNextBtn();
-	});
-
-	$("#nameText").bind("keyup", function() {
-		if ($(this).val().length > 1)
-			validateName = true;
-		else
-			validateName = false;
-
-		visibilityNextBtn();
-	});
-
-	$("#hp1Text").bind("blur", function() {
-		if ($(this).val().length >= 3)
-			validateHp1 = true;
-		else
-			validateHp1 = false;
-
-		visibilityNextBtn();
-	});
-
-	$("#hp1Text").bind("keyup", function() {
-		if ($(this).val().length >= 3)
-			validateHp1 = true;
-		else
-			validateHp1 = false;
-
-		visibilityNextBtn();
-	});
-
-	$("#hp2Text").bind("blur", function() {
-		if ($(this).val().length >= 4)
-			validateHp2 = true;
-		else
-			validateHp2 = false;
-
-		visibilityNextBtn();
-	});
-
-	$("#hp2Text").bind("keyup", function() {
-		if ($(this).val().length >= 4)
-			validateHp2 = true;
-		else
-			validateHp2 = false;
-
-		visibilityNextBtn();
-	});
-
-	$("#hp3Text").bind("blur", function() {
-		if ($(this).val().length >= 4)
-			validateHp3 = true;
-		else
-			validateHp3 = false;
-
-		visibilityNextBtn();
-	});
-
-	$("#hp3Text").bind("keyup", function() {
-		if ($(this).val().length >= 4)
-			validateHp3 = true;
-		else
-			validateHp3 = false;
-
-		visibilityNextBtn();
-	});
-
-	function visibilityNextBtn() {
-		console.log(validateHp1, validateHp2, validateHp3, validateName)
-		if (validateHp1 && validateHp2 && validateHp3 && validateName) {
-			$("#nextBtn").addClass("btn-primary");
-			console.log("1")
-		} else {
-			$("#nextBtn").removeClass("btn-primary");
-			console.log("2")
-		}
-	}
-
-	function next() {
-		if ($("#nameText").val().length < 1) {
-			alert("이름을 입력해 주세요.");
-			$("#nameText").focus();
-			return;
-		}
-
-		if ($("#hp1Text").val().length < 1) {
-			alert("휴대폰1을 입력해 주세요.");
-			$("#hp1Text").focus();
-			return;
-		}
-
-		if ($("#hp2Text").val().length < 1) {
-			alert("휴대폰2을 입력해 주세요.");
-			$("#hp2Text").focus();
-			return;
-		}
-
-		if ($("#hp3Text").val().length < 1) {
-			alert("휴대폰3을 입력해 주세요.");
-			$("#hp3Text").focus();
-			return;
-		}
-
-		document.getElementById("hp").value = $("#hp1Text").val() + "-" + $("#hp2Text").val() + "-" + $("#hp3Text").val();
-		document.getElementById("form").submit();
-	}
-
-	/*]]>*/
+    /*]]>*/
 </script>
 
 </body>
