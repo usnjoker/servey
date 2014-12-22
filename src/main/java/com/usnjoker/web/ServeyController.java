@@ -86,7 +86,7 @@ public class ServeyController {
 		if (null != servey.getAnswer()) {
 			servey.setCreatedBy(servey.getName());
 			servey.setCreatedAt(new Date());
-			serveyService.save(servey);
+//			serveyService.save(servey);
 		}
 
 		Servey prevServey = serveyService.getQuestion(servey.getName(), questionOrdering - 1);
@@ -128,7 +128,7 @@ public class ServeyController {
 		if (null != servey.getAnswer()) {
 			servey.setCreatedBy(servey.getName());
 			servey.setCreatedAt(new Date());
-			serveyService.save(servey);
+//			serveyService.save(servey);
 		}
 
 		Servey prevServey = serveyService.getQuestion(servey.getName(), questionOrdering - 1);
