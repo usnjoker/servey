@@ -39,8 +39,8 @@ public class ServeyService {
 		return servey;
 	}
 
-	public void save(Servey servey) {
-		serveyRepository.save(servey);
-	}
+//	public void save(Servey servey) {
+//		serveyRepository.save(servey);
+//	}
 
 }
